@@ -1,0 +1,224 @@
+<!-- <h4>Relatório de Vendas Mensais</h4>
+
+<app-loading *ngIf="!data"></app-loading>
+
+<div>
+  <canvas id="myChart" width="250" height="120"></canvas>
+</div>
+
+<div style="margin-top: 20px; width: 400px; height: 400px;">
+  <h5>Percentual de Vendas por Estado</h5>
+  <canvas id="myPieChart" max-width=400px max-height=400px></canvas>
+</div>
+
+<div *ngIf="data" style="margin-top: 40px;">
+  <h5>Estatísticas do Faturamento</h5>
+  <p>Menor Valor: {{ menorValor | number:'1.2-2' }}</p>
+  <p>Maior Valor: {{ maiorValor | number:'1.2-2' }}</p>
+  <p>Média Mensal: {{ mediaMensal | number:'1.2-2' }}</p>
+  <p>Dias Acima da Média: {{ diasAcimaDaMedia }}</p>
+
+  <h5>Percentuais por Estado:</h5>
+  <ul>
+    <li *ngFor="let estado of percentuaisPorEstado">
+      {{ estado.estado }}: {{ estado.percentual | number:'1.2-2' }}%
+    </li>
+  </ul>
+</div> -->
+<!-- <ion-split-pane when="xs" contentId="main"> -->
+<ion-content class="ion-padding">
+  <div style="text-align: center;">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Relatório de Vendas</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; padding: 20px;">
+      <!-- Estatísticas do Faturamento -->
+      <div style="min-width: 250px;">
+        <b>Estatísticas do Faturamento</b>
+        <table style="margin: 80px 0; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 6px; text-align: left; font-weight: bold;">Menor Valor:</td>
+            <td style="padding: 6px; text-align: left;">{{ menorValor | currency:'BRL':'symbol':'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px; text-align: left; font-weight: bold;">Maior Valor:</td>
+            <td style="padding: 6px; text-align: left;">{{ maiorValor | currency:'BRL':'symbol':'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px; text-align: left; font-weight: bold;">Média Mensal:</td>
+            <td style="padding: 6px; text-align: left;">{{ mediaMensal | currency:'BRL':'symbol':'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px; text-align: left; font-weight: bold;">Dias Acima da Média:</td>
+            <td style="padding: 6px; text-align: left;">{{ diasAcimaDaMedia }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Gráfico -->
+      <div>
+        <canvas id="myChart" width="1000" height="500"></canvas>
+      </div>
+    </div>
+    <!-- <div>
+        <canvas id="myChart" width="250" height="120"></canvas>
+      </div> -->
+    <div style="margin-top: 20px;">
+      <h5>Percentual de Vendas por Estado</h5>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <!-- <ion-card>
+            <ion-card-content
+              style="width: 400px; height: 400px; display: flex; justify-content: center; align-items:center">
+              <canvas id="myPieChart" style="max-width: 100%; height: auto;"></canvas>
+            </ion-card-content>
+          </ion-card> -->
+      </div>
+    </div>
+    <h5>Percentuais por Estado:</h5>
+    <!-- <ion-list class="text-center">
+        <ion-item *ngFor="let estado of percentuaisPorEstado" style="justify-content: center;">
+          <ion-label>{{ estado.estado }}:</ion-label>
+          <ion-note>{{ estado.percentual | number:'1.2-2' }}%</ion-note>
+        </ion-item>
+      </ion-list> -->
+    <!-- <div style="display: flex; justify-content: center; align-items: center;">
+        <ion-list style="text-align: center;">
+          <ion-item *ngFor="let estado of percentuaisPorEstado" lines="none"
+            style="flex-direction: column; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <ion-label style="margin-bottom: 4px;">{{ estado.estado }}</ion-label>
+              <ion-note>{{ estado.percentual | number:'1.2-2' }}%</ion-note>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div> -->
+
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 40px;">
+      <!-- Gráfico -->
+      <ion-card>
+        <ion-card-content
+          style="width: 400px; height: 400px; display: flex; justify-content: center; align-items: center;">
+          <canvas id="myPieChart" style="max-width: 100%; height: auto;"></canvas>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Lista de percentuais -->
+      <div>
+        <h5>Percentuais por Estado:</h5>
+        <ion-list style="text-align: center;">
+          <ion-item *ngFor="let estado of percentuaisPorEstado" lines="none" style="margin: 6px 0; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <ion-label style="margin-bottom: 4px;">{{ estado.estado }}</ion-label>
+              <ion-note>{{ estado.percentual | number:'1.2-2' }}%</ion-note>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="data" style="margin-top: 20px;"> -->
+    <!-- <h5>Estatísticas do Faturamento</h5> -->
+    <!-- <div style="display: flex; justify-content: center; align-items: center;"> -->
+    <!-- <ion-list style="text-align: center;"> -->
+    <!-- <ion-item lines="none" style="flex-direction: column; text-align: center;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <ion-label style="margin-bottom: 4px;">Menor Valor:</ion-label>
+                <ion-note>{{ menorValor | number:'1.2-2' }}</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none" style="flex-direction: column; text-align: center;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <ion-label style="margin-bottom: 4px;">Maior Valor:</ion-label>
+                <ion-note>{{ maiorValor | number:'1.2-2' }}</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none" style="flex-direction: column; text-align: center;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <ion-label style="margin-bottom: 4px;">Média Mensal:</ion-label>
+                <ion-note>{{ mediaMensal | number:'1.2-2' }}</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none" style="flex-direction: column; text-align: center;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <ion-label style="margin-bottom: 4px;">Dias Acima da Média:</ion-label>
+                <ion-note>{{ diasAcimaDaMedia }}</ion-note>
+              </div>
+            </ion-item> -->
+
+    <!-- <ion-item>
+            <ion-label>Maior Valor:</ion-label>
+            <ion-note>{{ maiorValor | number:'1.2-2' }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Média Mensal:</ion-label>
+            <ion-note>{{ mediaMensal | number:'1.2-2' }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Dias Acima da Média:</ion-label>
+            <ion-note>{{ diasAcimaDaMedia }}</ion-note>
+          </ion-item> -->
+    <!-- </ion-list> -->
+  </div>
+  <!-- </div> -->
+  <!-- </div> -->
+
+
+
+
+
+
+
+
+  <!-- <ion-list>
+      <ion-item
+        style="--min-height: 40px; --padding-start: 8px; --padding-end: 8px; font-size: 16px; justify-content: space-between;">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <ion-label style="font-size: 16px;">Menor Valor:</ion-label>
+          <ion-note style="font-size: 16px; color: var(--ion-text-color, #333);">
+            {{ menorValor | number:'1.2-2' }}
+          </ion-note>
+        </div>
+      </ion-item>
+    </ion-list> -->
+  <!-- <ion-toolbar color="primary" class="text-center">
+      <ion-title>Target 2025</ion-title>
+    </ion-toolbar> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <ion-footer style="margin-bottom:0;">
+    <ion-toolbar color="primary" class="text-center">
+      <ion-title>Target 2025</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar color="primary" class="text-center">
+    <ion-title>Target 2025</ion-title>
+  </ion-toolbar>
+</ion-footer> -->
+
+<!-- </ion-split-pane> -->
