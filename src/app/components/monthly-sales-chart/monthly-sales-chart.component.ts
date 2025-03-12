@@ -20,6 +20,7 @@ export class MonthlySalesChartComponent implements AfterViewInit {
   public maiorValor: number = 0;
   public mediaMensal: number = 0;
   public diasAcimaDaMedia: number = 0;
+  public totalFaturamento: number = 0;
   public percentuaisPorEstado: any[] = [];
 
   constructor(
@@ -40,6 +41,7 @@ export class MonthlySalesChartComponent implements AfterViewInit {
           this.maiorValor = res.maiorValor;
           this.mediaMensal = res.mediaMensal;
           this.diasAcimaDaMedia = res.diasAcimaDaMedia;
+          this.totalFaturamento = res.totalFaturamento;
           this.percentuaisPorEstado = res.percentuaisPorEstado || [];  // Armazena os dados recebidos
           this.render();
           this.renderPieChart(this.percentuaisPorEstado)    // Chama a função para renderizar o gráfico

@@ -20,6 +20,7 @@ export interface FaturamentoResponse {
     maiorValor: number;
     mediaMensal: number;
     diasAcimaDaMedia: number;
+    totalFaturamento: number;
     percentuaisPorEstado: PercentualPorEstado[];
 }
 
